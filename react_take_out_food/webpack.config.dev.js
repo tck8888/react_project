@@ -45,17 +45,45 @@ const htmlArray = getHtmlArray(entryMap);
 
 module.exports = {
     mode: 'development',
+    devServer: {
+        contentBase: devPath
+    },
     entry: entryMap,
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
     output: {
         path: devPath,
         filename: '[name].min.js'
     },
     module: {
-        rules: [
-            { test: /\.(js|jsx)$/, use: [{ loader: 'babel-loader' }], include: srcRoot },
-            { test: /\.css$/, use: ['style-loader', 'css-loader'], include: srcRoot },
-            { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'], include: srcRoot },
-            { test: /\.(png|jpg|jpeg)$/, use: 'url-loader?limit=8192', include: srcRoot }
+        rules: [{
+                test: /\.(js|jsx)$/,
+                use: [{
+                    loader: 'babel-loader'
+                }],
+                include: srcRoot
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
+                include: srcRoot
+            },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', 'css-loader', 'sass-loader', {
+                    loader: 'sass-resources-loader',
+                    options: {
+                        resources: srcRoot + '/component/common.scss'
+                    }
+                }],
+                include: srcRoot
+            },
+            {
+                test: /\.(png|jpg|jpeg)$/,
+                use: 'url-loader?limit=8192',
+                include: srcRoot
+            }
         ]
     },
     plugins: [
