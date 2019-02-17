@@ -1,6 +1,14 @@
-import { createStore } from 'redux';
-import mainReducer from './reducers/main'
+import {
+    createStore
+} from 'redux';
+import mainReducer from './reducers/main';
 
 const store = createStore(mainReducer);
 
+if (module.hot) {
+    module.hot.accept('./reducers/main.js', () => {
+        const nextRootReducer = require('./reducers/main.js').default;
+        store.replaceReducer(nextRootReducer);
+    });
+}
 export default store;
