@@ -11,7 +11,7 @@ class BottomBar extends React.Component {
 
   renderItems() {
     let tabs = this.props.tabs;
-    return tabs.map((item, index) => {
+    return tabs.map(item => {
       let cls = item.key + " btn-item";
       let name = item.name;
       if (item.key === this.props.activeKey) {

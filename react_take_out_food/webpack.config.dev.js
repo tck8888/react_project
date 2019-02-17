@@ -61,6 +61,8 @@ module.exports = {
                 test: /\.(js|jsx)$/,
                 use: [{
                     loader: 'babel-loader'
+                }, {
+                    loader: 'eslint-loader'
                 }],
                 include: srcRoot
             },
