@@ -1,4 +1,5 @@
 import tabReducer from './tabReducer.js';
+import categoryReducer from './categoryReducer';
 
 import {
     combineReducers
@@ -6,6 +7,7 @@ import {
 
 const reducers = combineReducers({
     tabReducer,
+    categoryReducer
 })
 
 export default reducers;
